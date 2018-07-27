@@ -9,15 +9,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder    > {
-    private ArrayList<Item> items;
+    private List<Item> items;
 
-    // TODO constructor
-    // temporarily it will be ArrayList<Item>; in next step it will be List<Item>
-
-
-    public RecyclerAdapter(ArrayList<Item> items) {
+    // constructor
+    public RecyclerAdapter(List<Item> items) {
         this.items = items;
     }
 
