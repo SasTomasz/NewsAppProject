@@ -27,7 +27,7 @@ public class QueryUtils {
     public QueryUtils() {
     }
 
-    public static List<Item> fetchArticle(String urlAddress){
+    public static List<Item> fetchArticle(String urlAddress) {
         URL url = createUrl(urlAddress);
 
         // Perform HTTP request to the URL and receive a JSON response back
@@ -43,10 +43,11 @@ public class QueryUtils {
 
         try {
             JSONObject rootJson = new JSONObject(jsonResponse);
+            JSONObject jsonObject = rootJson.getJSONObject("response");
 
-            JSONArray jsonArrayResults = rootJson.getJSONArray("features");
+            JSONArray jsonArrayResults = jsonObject.getJSONArray("results");
 
-            for (int i = 0; i<jsonArrayResults.length(); i++){
+            for (int i = 0; i < jsonArrayResults.length(); i++) {
                 JSONObject jsonResults = jsonArrayResults.getJSONObject(i);
                 JSONObject jsonFields = jsonResults.getJSONObject("fields");
 
@@ -57,15 +58,17 @@ public class QueryUtils {
                 String publishDate = jsonResults.getString("webPublicationDate");
                 String web = jsonResults.getString("webUrl");
 
-                articles.add(new Item(title, author, publishDate, text, section));
+                Log.i(TAG, "fetchArticle after extract json, webUrl: " + web);
+
+                articles.add(new Item(title, author, publishDate, text, section, web));
             }
 
-            } catch (JSONException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
 
 
-        return articles ;
+        return articles;
     }
 
     /**
@@ -93,8 +96,8 @@ public class QueryUtils {
         InputStream inputStream = null;
         try {
             urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setReadTimeout(10000 /* milliseconds */);
-            urlConnection.setConnectTimeout(15000 /* milliseconds */);
+            urlConnection.setReadTimeout(10000);
+            urlConnection.setConnectTimeout(15000);
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
 
@@ -136,7 +139,6 @@ public class QueryUtils {
         }
         return output.toString();
     }
-
 
 
 }

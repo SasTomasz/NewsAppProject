@@ -16,12 +16,16 @@ public class Item {
     // Section name
     private String sectionName;
 
-    public Item(String title, String author, String publishDate, String content, String sectionName) {
+    // webAdress
+    private String webUrl;
+
+    public Item(String title, String author, String publishDate, String content, String sectionName, String webUrl) {
         this.title = title;
         this.author = author;
         this.publishDate = publishDate;
         this.content = content;
         this.sectionName = sectionName;
+        this.webUrl = webUrl;
     }
 
     public String getTitle() {
@@ -43,4 +47,6 @@ public class Item {
     public String getSectionName() {
         return sectionName;
     }
+
+    public String getWebUrl() {return webUrl;}
 }
