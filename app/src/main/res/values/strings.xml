@@ -2,4 +2,46 @@
     <string name="app_name">News App Project</string>
     <string name="no_data">There is no data</string>
     <string name="no_internet">There is no internet connection</string>
+
+    <string name="settings_menu_item">Settings</string>
+    <string name="settings_title">Article Settings</string>
+
+    <!-- Strings for Results on Page Preference -->
+    <string name="settings_results_on_page_label">Results on Page</string>
+    <string name="settings_results_on_page_key" translatable="false">page_results</string>
+    <string name="settings_results_on_page_default" translatable="false">10</string>
+
+    <!-- Strings for Show Section Preference -->
+    <string name="settings_show_section_label">Show Section</string>
+    <string name="settings_show_section_key" translatable="false">show_section</string>
+    <string name="settings_show_section_default" translatable="false">@string/settings_show_world_news_section_value</string>
+
+    <!-- Strings for Order by Preference -->
+    <string name="settings_order_by_label">Order by</string>
+    <string name="settings_order_by_key" translatable="false">order_by</string>
+    <string name="settings_order_by_default" translatable="false">@string/settings_order_by_newest_value</string>
+
+    <!-- Label for show sport section -->
+    <string name="settings_show_sport_section_label">Sport</string>
+    <string name="settings_show_sport_section_value" translatable="false">sport</string>
+
+    <!-- Label for show world news section -->
+    <string name="settings_show_world_news_section_label">World News</string>
+    <string name="settings_show_world_news_section_value" translatable="false">world news</string>
+
+    <!-- Label for show fashion section -->
+    <string name="settings_show_fashion_section_label">Fashion</string>
+    <string name="settings_show_fashion_section_value" translatable="false">fashion</string>
+
+    <!-- Label for show recipes section -->
+    <string name="settings_show_recipes_section_label">Recipes</string>
+    <string name="settings_show_recipes_section_value" translatable="false">recipes</string>
+
+    <!-- Label for order by oldest -->
+    <string name="settings_order_by_oldest_label">Oldest</string>
+    <string name="settings_order_by_oldest_value" translatable="false">oldest</string>
+
+    <!-- Label for order by newest -->
+    <string name="settings_order_by_newest_label">Newest</string>
+    <string name="settings_order_by_newest_value" translatable="false">newest</string>
 </resources>
