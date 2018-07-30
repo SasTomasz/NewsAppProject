@@ -110,7 +110,7 @@ public class QueryUtils {
                 Log.e(TAG, "Error response code: " + urlConnection.getResponseCode());
             }
         } catch (IOException e) {
-            Log.e(TAG, "Problem retrieving the earthquake JSON results.", e);
+            Log.e(TAG, "Problem retrieving the Guardian JSON results.", e);
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();

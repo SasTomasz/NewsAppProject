@@ -4,12 +4,16 @@ import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,17 +30,16 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private RecyclerView recyclerView;
     private RecyclerAdapter adapter;
     private String apiKey = BuildConfig.THE_GUARDIAN_API_KEY;
-    private String THE_GUARDIAN_DATA = "https://content.guardianapis.com/search?show-fields=byline%2CbodyText&api-key=" + apiKey;
+    private String THE_GUARDIAN_DATA = "https://content.guardianapis.com/search";
     private static final int LOADER_ID = 0;
     private TextView emptyStateView;
     private View loadingIndicator;
     private NetworkInfo networkInfo;
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onStart() {
         super.onStart();
-
-
     }
 
     @Override
@@ -85,8 +88,33 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public Loader<List<Item>> onCreateLoader(int id, Bundle args) {
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        // get String value from the preferences
+        String showSection = sharedPreferences.getString(getString(R.string.settings_show_section_key),
+                getString(R.string.settings_show_section_default));
+
+        String numberOfResults = sharedPreferences.getString(getString(R.string.settings_results_on_page_key),
+                getString(R.string.settings_results_on_page_default));
+
+        // parse URI with URL
+        Uri baseUri = Uri.parse(THE_GUARDIAN_DATA);
+
+        // prepare the baseUri in order to add query parameter in next step
+        Uri.Builder uriBuilder = baseUri.buildUpon();
+
+        // Append query parameter and its value
+        uriBuilder.appendQueryParameter("page-size", numberOfResults );
+        uriBuilder.appendQueryParameter("show-fields", "byline,bodyText");
+        uriBuilder.appendQueryParameter("api-key", apiKey);
+
+        if(!showSection.equals(getString(R.string.settings_show_all_section_value))) {
+            uriBuilder.appendQueryParameter("section", showSection);
+        }
+
         // create new loader for the given url
-        return new ArticleLoader(this, THE_GUARDIAN_DATA);
+        return new ArticleLoader(this, uriBuilder.toString());
     }
 
     @Override
@@ -116,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     // This method initialize the contents of the Activity's options menu.
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the Options Menu we specified in XML
+        // Inflate the Options Menu specified in XML
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }

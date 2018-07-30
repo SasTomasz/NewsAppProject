@@ -27,9 +27,6 @@ public class SettingsActivity extends AppCompatActivity {
             Preference showSection = findPreference(getString(R.string.settings_show_section_key));
             bindPreferenceSummaryToValue(showSection);
 
-            Preference orderBy = findPreference(getString(R.string.settings_order_by_key));
-            bindPreferenceSummaryToValue(orderBy);
-
             Preference numberOfResults = findPreference(getString(R.string.settings_results_on_page_key));
             bindPreferenceSummaryToValue(numberOfResults);
         }

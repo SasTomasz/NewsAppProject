@@ -9,13 +9,6 @@
         android:entries="@array/settings_show_section_label"
         android:key="@string/settings_show_section_key"/>
 
-    <ListPreference
-        android:defaultValue="@string/settings_order_by_default"
-        android:entryValues="@array/settings_order_by_value"
-        android:title="@string/settings_order_by_label"
-        android:entries="@array/settings_order_by_label"
-        android:key="@string/settings_order_by_key"/>
-
     <EditTextPreference
         android:defaultValue="@string/settings_results_on_page_default"
         android:inputType="numberDecimal"
